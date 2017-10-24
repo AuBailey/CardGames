@@ -6,7 +6,7 @@ public class Player {
 	
 	private String name;
 	private int bankAmount;
-	private ArrayList<String> hand;
+	private ArrayList<Card> hand;
 	
 	public Player(String name, int bankAmount) {
 		setName(name);
