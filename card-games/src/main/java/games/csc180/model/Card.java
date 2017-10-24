@@ -2,12 +2,12 @@ package games.csc180.model;
 
 public class Card {
 	
-	public Card(Suit color, int value) {
+	public Card(Suit suit, int value) {
 		super();
-		this.color = color;
+		this.suit = suit;
 		this.value = value;
 	}
-	public Suit color;
+	public Suit suit;
 	public int value;
 	
 	
