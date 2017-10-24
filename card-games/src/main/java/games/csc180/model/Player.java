@@ -29,5 +29,10 @@ public class Player {
 	public int getBankAmount() {
 		return this.bankAmount;
 	}
+	
+	@Override
+	public String toString() {
+		return "PLayer name: " + this.getName() + ", Bank Total: " + this.getBankAmount();
+	}
 
 }
