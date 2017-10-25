@@ -15,7 +15,7 @@ public class CardHandler {
 		return true;
 	}
 
-	public Card DealACard(Deck deck) {
+	public Card DealCard(Deck deck) {
 		return deck.remove(0);
 	}
 
@@ -26,4 +26,6 @@ public class CardHandler {
 		}
 		return cards;
 	}
+	
+
 }
