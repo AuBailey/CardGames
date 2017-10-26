@@ -6,11 +6,11 @@ public class Player {
 	private DeckHandler ch = new DeckHandler();
 	private String name;
 	private int bankAmount;
-	Hand hand = new Hand();
-
+	private Hand hand = new Hand();
 	public Player(String name, int bankAmount) {
 		setName(name);
 		setBankAmount(bankAmount);
+		hand = new ArrayList<>();
 	}
 
 	public void setName(String name) {
@@ -28,12 +28,21 @@ public class Player {
 	public int getBankAmount() {
 		return this.bankAmount;
 	}
+	
+	public ArrayList<Card> getHand() {
+		return this.hand;
+	}
 
 	@Override
 	public String toString() {
 		return "PLayer name: " + this.getName() + ", Bank Total: " + this.getBankAmount();
 	}
-
+	
+	/**
+	 * Shuffles the player's hand during the game of war.
+	 * @return
+	 * always returns true
+	 */
 	public boolean shuffle() {
 		for (int i = 0; i < hand.size() * 3.7; i++) {
 			for (int j = 0; j < hand.size(); j++) {
@@ -45,7 +54,12 @@ public class Player {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * For the game of war. Removes and plays the top card in the player's hand.
+	 * @return
+	 * 	returns is the played card.
+	 */
 	public Card PlayTopCard() {
 		return hand.remove(0);
 	}
@@ -82,5 +96,19 @@ public class Player {
 		hand.addAll(ch.DealCards(deck, amount));
 		return true;}
 		return false;
+	}
+	
+	/**
+	 * Check that the player's bet is a legal bet.
+	 * @param amount
+	 * @param betAmount
+	 * @return
+	 */
+	public boolean makeBet(int amount, int betAmount) {
+		if(amount<betAmount || amount<0) {
+			return false;
+		}
+		bankAmount-=amount;
+		return true;
 	}
 }
