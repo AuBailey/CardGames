@@ -4,7 +4,8 @@ public enum Suit {
 	spade("spade"),
 	club("club"),
 	diamond("diamond"),
-	heart("heart");
+	heart("heart"),
+	thevoid("void");
 	
 	String suit;
 	Suit(String suit){
