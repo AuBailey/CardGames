@@ -18,7 +18,7 @@ public class SaveAndLoad {
 		}
 		fileW.write("numberOfPlayers: " + p.length + " players: ");
 		for (int i = 0; i < p.length; i++) {
-			Hand hand = p[i].hand;
+			Hand hand = (Hand) p[i].getHand();
 			fileW.write(p[i].getName() + "&" + p[i].getBankAmount() + " ");
 			for (int j = 0; i < hand.size(); j++) {
 				fileW.write(hand.get(j).suit.suit + "&" + hand.get(j).value + "HCS ");

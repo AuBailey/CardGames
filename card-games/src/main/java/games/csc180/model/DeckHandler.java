@@ -2,7 +2,6 @@ package games.csc180.model;
 
 import java.util.ArrayList;
 
-public class CardHandler {
 public class DeckHandler {
 	
 	public boolean shuffle(Deck deck) {

@@ -2,21 +2,21 @@ package games.csc180.model.games;
 
 import java.util.ArrayList;
 
-import games.csc180.model.CardHandler;
 import games.csc180.model.Deck;
+import games.csc180.model.DeckHandler;
 import games.csc180.model.Player;
 
 public class Poker {
 
 	private ArrayList<Player> players;
 	private Deck deck = new Deck(14);
-	private CardHandler dealer;
+	private DeckHandler dealer;
 	private int previousBetAmount;
 	private int pot;
 
 	public Poker(boolean housePlaying) {
-		players = new ArrayList<>();
-		dealer = new CardHandler();
+		players = new ArrayList<Player>();
+		dealer = new DeckHandler();
 		if (housePlaying) {
 			players.add(new Player("House", 100));
 		}

@@ -58,11 +58,11 @@ public class War {
 				players[i].shuffle();
 			}
 			initiateWar(players);
-			if(players[0].hand.isEmpty()) {
+			if(players[0].getHand().isEmpty()) {
 				//player 2 wins
 				break rotateTurns;
 			}
-			else if(players[1].hand.isEmpty()) {
+			else if(players[1].getHand().isEmpty()) {
 				//player 1 wins
 				break rotateTurns;
 			}
@@ -82,9 +82,9 @@ public class War {
 			field.add(players[i].PlayTopCard());
 		}
 		if (field.get(field.size() - 1).value > field.get(field.size() - 2).value) {
-			players[0].hand.addAll(field);
+			players[0].getHand().addAll(field);
 		} else if (field.get(field.size() - 1).value < field.get(field.size() - 2).value) {
-			players[1].hand.addAll(field);
+			players[1].getHand().addAll(field);
 		} else {
 			for (int i = 0; i < numberOfPlayers; i++) {
 			field.addAll(players[i].PlayTopCards(3));
