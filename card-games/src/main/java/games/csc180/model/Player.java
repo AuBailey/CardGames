@@ -3,10 +3,10 @@ package games.csc180.model;
 import java.util.ArrayList;
 
 public class Player {
-	private CardHandler ch = new CardHandler();
+	private DeckHandler ch = new DeckHandler();
 	private String name;
 	private int bankAmount;
-	private Hand hand = new Hand();
+	Hand hand = new Hand();
 
 	public Player(String name, int bankAmount) {
 		setName(name);
@@ -51,7 +51,7 @@ public class Player {
 	}
 
 	public ArrayList<Card> PlayTopCards(int amount) {
-		ArrayList<Card> cards = new ArrayList<>();
+		ArrayList<Card> cards = new ArrayList<Card>();
 		for (int i = 0; i < amount; i++) {
 			cards.add(hand.remove(0));
 		}
@@ -63,18 +63,24 @@ public class Player {
 	}
 
 	public ArrayList<Card> PlayCards(int[] indexes) {
-		ArrayList<Card> cards = new ArrayList<>();
+		ArrayList<Card> cards = new ArrayList<Card>();
 		for (int i = 0; i < indexes.length; i++) {
 			cards.add(hand.remove(indexes[i]));
 		}
 		return cards;
 	}
 	
-	public void DrawCard(Deck deck) {
+	public boolean DrawCard(Deck deck) {
+		if(!deck.isEmpty()) {
 		hand.add(ch.DealCard(deck));
+		return true;}
+		return false;
 	}
 	
-	public void DrawCards(Deck deck, int amount) {
+	public boolean DrawCards(Deck deck, int amount) {
+		if(!deck.isEmpty()&&deck.size()>=amount) {
 		hand.addAll(ch.DealCards(deck, amount));
+		return true;}
+		return false;
 	}
 }
