@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import games.csc180.model.Card;
-import games.csc180.model.CardHandler;
 import games.csc180.model.Deck;
+import games.csc180.model.DeckHandler;
 import games.csc180.model.Player;
 
 
@@ -21,7 +21,7 @@ public class Poker {
 
 	private ArrayList<Player> players;
 	private Deck deck = new Deck(14);
-	private CardHandler dealer;
+	private DeckHandler dealer;
 	private int previousBetAmount;
 	private int pot;
 	private int winningHandValue;
@@ -29,7 +29,7 @@ public class Poker {
 
 	public Poker(boolean housePlaying) {
 		players = new ArrayList<>();
-		dealer = new CardHandler();
+		dealer = new DeckHandler();
 		if (housePlaying) {
 			players.add(new Player("House", 100));
 		}
