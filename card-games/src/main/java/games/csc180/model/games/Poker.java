@@ -273,4 +273,8 @@ public class Poker {
 		return false;
 	}
 	
+	public void addPlayer(Player p) {
+		players.add(p);
+	}
+	
 }
