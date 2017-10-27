@@ -110,6 +110,10 @@ public class Player {
 		bankAmount-=amount;
 		return true;
 	}
+	
+	public void addPotToBank(int pot) {
+		this.bankAmount += pot;
+	}
 
 	public void setHand(Hand hand) {
 		this.hand = hand;
