@@ -85,8 +85,9 @@ public class Player {
 	
 	public boolean DrawCard(Deck deck) {
 		if(!deck.isEmpty()) {
-		getHand().add(ch.DealCard(deck));
-		return true;}
+			getHand().add(ch.DealCard(deck));
+			return true;
+		}
 		return false;
 	}
 	

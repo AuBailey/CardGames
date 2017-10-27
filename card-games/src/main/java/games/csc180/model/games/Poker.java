@@ -98,7 +98,7 @@ public class Poker {
 		return p;
 	}
 
-	private void dealPlayerCards() {
+	public void dealPlayerCards() {
 		for (int i = 0; i < 5; i++) {
 			for (Player p : players) {
 				p.DrawCard(deck);
