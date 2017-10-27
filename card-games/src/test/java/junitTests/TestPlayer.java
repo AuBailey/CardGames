@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import games.csc180.model.Deck;
 import games.csc180.model.Player;
-import junit.framework.Assert;
 
 public class TestPlayer {
 	
@@ -33,11 +32,10 @@ public class TestPlayer {
 //		
 //	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testDrawCard() {
 		p.DrawCard(deck);
-		Assert.assertEquals(1, p.getHand().size());
+		assertEquals(1, p.getHand().size());
 	}
 
 }

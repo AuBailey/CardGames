@@ -119,4 +119,14 @@ public class Player {
 	public void setHand(Hand hand) {
 		this.hand = hand;
 	}
+	
+	@Override
+	public boolean equals(Object p) {
+		boolean equal = false;
+		if(!(p instanceof Player)) {
+			return equal;
+		}
+		equal = this.toString().equals(p.toString());
+		return equal;
+	}
 }

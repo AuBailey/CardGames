@@ -24,7 +24,7 @@ public class Poker {
 	private DeckHandler dealer;
 	private int previousBetAmount;
 	private int pot;
-	private int winningHandValue;
+	private int winningHandValue = 0;
 	private int handWinningPlayerIndex;
 
 	public Poker(boolean housePlaying) {
@@ -130,7 +130,7 @@ public class Poker {
 		}
 	}
 
-	private void checkPlayerBalances() {
+	public void checkPlayerBalances() {
 		for (Player p : players) {
 			if (p.getBankAmount() <= -500) {
 				players.remove(p);
@@ -189,7 +189,7 @@ public class Poker {
 	 */
 	private boolean fold(Player p) {
 		//prompt for fold
-		boolean wantsToFold = false;
+		boolean wantsToFold = true;
 		if(wantsToFold) {
 			players.remove(p);
 			return true;
@@ -197,7 +197,7 @@ public class Poker {
 		return false;
 	}
 	
-	private Player checkForHighestCard(int currentWinningHandValue ,int i) {
+	public Player checkForHighestCard(int currentWinningHandValue ,int i) {
 		Player p = null;
 		if(currentWinningHandValue>winningHandValue) {
 			handWinningPlayerIndex = i;
@@ -275,6 +275,10 @@ public class Poker {
 	
 	public void addPlayer(Player p) {
 		players.add(p);
+	}
+	
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 	
 }
