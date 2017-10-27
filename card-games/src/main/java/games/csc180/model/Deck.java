@@ -12,7 +12,7 @@ public class Deck extends ArrayList<Card> {
 	 * 
 	 * @param maxValue
 	 *            should be 13 for solitaire, 10 or 11 for blackjack, 14 for war and
-	 *            13 or 14 for everything else.
+	 *            14 for everything else.
 	 */
 	public Deck(int maxValue) {
 		boolean blackJack = false;

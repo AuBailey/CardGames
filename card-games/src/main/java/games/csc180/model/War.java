@@ -39,10 +39,9 @@ public class War {
 	 * Starts a game of war, waiting as necessary for players to be ready
 	 * @throws InterruptedException from Thread.State.WAITING
 	 */
-	public static void playWar() throws InterruptedException {
+	public static void playWar(String[] names) throws InterruptedException {
 		Player[] players = new Player[numberOfPlayers];
 		Deck deck = new Deck(14);
-		String[] names = null;
 		for (int i = 0; i < numberOfPlayers; i++) {
 			players[i] = new Player(names[i], 0);
 		}
