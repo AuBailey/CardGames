@@ -40,5 +40,12 @@ public class DeckHandler {
 		return errCard;
 	}
 	
+	public boolean returnCardsToDeck(Deck deck, ArrayList<Card> cards) {
+		return deck.addAll(cards);
+	}
+	
+	public boolean returnCardsToDeck(Deck deck, Card card) {
+		return deck.add(card);
+	}
 
 }
