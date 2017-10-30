@@ -1,7 +1,11 @@
-package games.csc180.model;
+package games.csc180.model.games;
 
 import java.lang.Thread.State;
 import java.util.ArrayList;
+
+import games.csc180.model.Card;
+import games.csc180.model.Deck;
+import games.csc180.model.Player;
 
 public class War {
 	public static int numberOfPlayers = 2;
