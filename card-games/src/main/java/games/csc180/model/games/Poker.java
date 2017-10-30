@@ -20,7 +20,7 @@ import games.csc180.model.Player;
 public class Poker {
 
 	private ArrayList<Player> players;
-	private Deck deck = new Deck(14);
+	private Deck deck;
 	private DeckHandler dealer;
 	private int previousBetAmount;
 	private int pot;
@@ -30,6 +30,7 @@ public class Poker {
 	public Poker(boolean housePlaying) {
 		players = new ArrayList<>();
 		dealer = new DeckHandler();
+		deck = new Deck(14);
 		if (housePlaying) {
 			players.add(new Player("House", 100));
 		}
@@ -42,6 +43,7 @@ public class Poker {
 	}
 
 	private void playSingleHand() {
+		dealer.shuffle(deck);
 		dealPlayerCards();
 		playersAntes();
 		makePlayerTurns();
@@ -223,7 +225,7 @@ public class Poker {
 		return p;
 	}
 	
-	private String checkForThreeOfAKind(List<Card> hand) {
+	public String checkForThreeOfAKind(List<Card> hand) {
 		if(hand.get(0).value == hand.get(1).value && hand.get(1).value == hand.get(2).value) {
 			if(hand.get(3).value == hand.get(4).value) {
 				return "full house";
@@ -240,7 +242,7 @@ public class Poker {
 		return "no";
 	}
 	
-	private int checkForPairs(List<Card> hand) {
+	public int checkForPairs(List<Card> hand) {
 		int pairCount =0;
 		if(hand.get(0).value == hand.get(1).value) {
 			pairCount++;
@@ -257,14 +259,14 @@ public class Poker {
 		return pairCount;
 	}
 	
-	private boolean checkForStraight(List<Card> hand) {
+	public boolean checkForStraight(List<Card> hand) {
 		if(hand.get(1).value == (hand.get(0).value+1) && hand.get(2).value == (hand.get(0).value+2) && hand.get(3).value == (hand.get(0).value+3) && hand.get(4).value == (hand.get(0).value+4)) {
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean checkFourOfAKind(List<Card> currentHand) {
+	public boolean checkFourOfAKind(List<Card> currentHand) {
 		if(currentHand.get(0).value == currentHand.get(1).value && currentHand.get(1).value == currentHand.get(2).value && currentHand.get(2).value == currentHand.get(3).value) {
 			return true;
 		} else if(currentHand.get(1).value == currentHand.get(2).value && currentHand.get(2).value == currentHand.get(3).value && currentHand.get(3).value == currentHand.get(4).value) {
