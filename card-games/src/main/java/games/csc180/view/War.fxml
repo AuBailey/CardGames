@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="games.csc180.view.MainScreen">
+
+  <top>
+      <GridPane>
+      <children>
+        <HBox alignment="TOP_LEFT" prefHeight="100.0" prefWidth="732.5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Label alignment="TOP_LEFT" text="Player 1"></Label>
+          </children>
+        </HBox>
+        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="732.5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <children>
+            <Label alignment="TOP_RIGHT" text="Win Condition"></Label>
+          </children>
+        </HBox>
+      </children>
+    </GridPane>
+  </top>
+  
+  <bottom>
+    <GridPane>
+      <children>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="732.5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="250.0" text="Place Card" />
+          </children>
+        </HBox>
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="732.5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <children>
+            <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="250.0" text="Quit" fx:id="quitWar" />
+          </children>
+        </HBox>
+      </children>
+    </GridPane>
+  </bottom>
+
+</BorderPane>
