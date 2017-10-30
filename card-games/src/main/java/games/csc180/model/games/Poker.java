@@ -20,16 +20,17 @@ import games.csc180.model.Player;
 public class Poker {
 
 	private ArrayList<Player> players;
-	private Deck deck = new Deck(14);
+	private Deck deck;
 	private DeckHandler dealer;
 	private int previousBetAmount;
 	private int pot;
-	private int winningHandValue;
+	private int winningHandValue = 0;
 	private int handWinningPlayerIndex;
 
 	public Poker(boolean housePlaying) {
 		players = new ArrayList<>();
 		dealer = new DeckHandler();
+		deck = new Deck(14);
 		if (housePlaying) {
 			players.add(new Player("House", 100));
 		}
@@ -42,6 +43,7 @@ public class Poker {
 	}
 
 	private void playSingleHand() {
+		dealer.shuffle(deck);
 		dealPlayerCards();
 		playersAntes();
 		makePlayerTurns();
@@ -98,7 +100,7 @@ public class Poker {
 		return p;
 	}
 
-	private void dealPlayerCards() {
+	public void dealPlayerCards() {
 		for (int i = 0; i < 5; i++) {
 			for (Player p : players) {
 				p.DrawCard(deck);
@@ -130,7 +132,7 @@ public class Poker {
 		}
 	}
 
-	private void checkPlayerBalances() {
+	public void checkPlayerBalances() {
 		for (Player p : players) {
 			if (p.getBankAmount() <= -500) {
 				players.remove(p);
@@ -189,7 +191,7 @@ public class Poker {
 	 */
 	private boolean fold(Player p) {
 		//prompt for fold
-		boolean wantsToFold = false;
+		boolean wantsToFold = true;
 		if(wantsToFold) {
 			players.remove(p);
 			return true;
@@ -197,7 +199,7 @@ public class Poker {
 		return false;
 	}
 	
-	private Player checkForHighestCard(int currentWinningHandValue ,int i) {
+	public Player checkForHighestCard(int currentWinningHandValue ,int i) {
 		Player p = null;
 		if(currentWinningHandValue>winningHandValue) {
 			handWinningPlayerIndex = i;
@@ -223,7 +225,7 @@ public class Poker {
 		return p;
 	}
 	
-	private String checkForThreeOfAKind(List<Card> hand) {
+	public String checkForThreeOfAKind(List<Card> hand) {
 		if(hand.get(0).value == hand.get(1).value && hand.get(1).value == hand.get(2).value) {
 			if(hand.get(3).value == hand.get(4).value) {
 				return "full house";
@@ -240,7 +242,7 @@ public class Poker {
 		return "no";
 	}
 	
-	private int checkForPairs(List<Card> hand) {
+	public int checkForPairs(List<Card> hand) {
 		int pairCount =0;
 		if(hand.get(0).value == hand.get(1).value) {
 			pairCount++;
@@ -257,20 +259,28 @@ public class Poker {
 		return pairCount;
 	}
 	
-	private boolean checkForStraight(List<Card> hand) {
+	public boolean checkForStraight(List<Card> hand) {
 		if(hand.get(1).value == (hand.get(0).value+1) && hand.get(2).value == (hand.get(0).value+2) && hand.get(3).value == (hand.get(0).value+3) && hand.get(4).value == (hand.get(0).value+4)) {
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean checkFourOfAKind(List<Card> currentHand) {
+	public boolean checkFourOfAKind(List<Card> currentHand) {
 		if(currentHand.get(0).value == currentHand.get(1).value && currentHand.get(1).value == currentHand.get(2).value && currentHand.get(2).value == currentHand.get(3).value) {
 			return true;
 		} else if(currentHand.get(1).value == currentHand.get(2).value && currentHand.get(2).value == currentHand.get(3).value && currentHand.get(3).value == currentHand.get(4).value) {
 			return true;
 		}
 		return false;
+	}
+	
+	public void addPlayer(Player p) {
+		players.add(p);
+	}
+	
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 	
 }

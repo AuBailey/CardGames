@@ -85,8 +85,9 @@ public class Player {
 	
 	public boolean DrawCard(Deck deck) {
 		if(!deck.isEmpty()) {
-		getHand().add(ch.DealCard(deck));
-		return true;}
+			getHand().add(ch.DealCard(deck));
+			return true;
+		}
 		return false;
 	}
 	
@@ -117,5 +118,15 @@ public class Player {
 
 	public void setHand(Hand hand) {
 		this.hand = hand;
+	}
+	
+	@Override
+	public boolean equals(Object p) {
+		boolean equal = false;
+		if(!(p instanceof Player)) {
+			return equal;
+		}
+		equal = this.toString().equals(p.toString());
+		return equal;
 	}
 }
