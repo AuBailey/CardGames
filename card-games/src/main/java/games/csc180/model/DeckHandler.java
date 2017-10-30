@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DeckHandler {
 	
-	public boolean shuffle(Deck deck) {
+	public Deck shuffle(Deck deck) {
 		for (int i = 0; i < deck.size() * 3.7; i++) {
 			for (int j = 0; j < deck.size(); j++) {
 				int rand = (int) (Math.random() * deck.size() + .5);
@@ -13,7 +13,7 @@ public class DeckHandler {
 				deck.set(i, hold);
 			}
 		}
-		return true;
+		return deck;
 	}
 
 	public Card DealCard(Deck deck) {

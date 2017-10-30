@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class Deck extends ArrayList<Card> {
 	private static final long serialVersionUID = 1L;
 
-	ArrayList<Card> deck = new ArrayList<Card>();
-
 	/**
 	 * Creates a new ArrayList of Cards containing the standard 52 cards
 	 * 
@@ -22,22 +20,16 @@ public class Deck extends ArrayList<Card> {
 		}
 		Suit[] suits = Suit.values();
 		CardName[] cardName = CardName.values();
-		boolean ace14 = false;
-		outer: for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 			for (int j = maxValue - 12; j <= maxValue; j++) {
 				int jay = j;
 				if (j == 14) {
-					j = 1;
-					ace14 = true;
+					jay = 1;
 				}
 				if (blackJack && j > 10) {
 					jay = 10;
 				}
-
-				deck.add(new Card(suits[i], cardName[j], jay));
-				if (ace14) {
-					break outer;
-				}
+				this.add(new Card(suits[i], cardName[jay-1], jay));
 			}
 		}
 	}

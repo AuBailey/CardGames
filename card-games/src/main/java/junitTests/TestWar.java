@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import games.csc180.model.War;
+import games.csc180.model.games.War;
 
 public class TestWar {
 
 	@Test
-	public void playWarWorks() {
+	public void testPlayWar() {
 	}
 
 }
