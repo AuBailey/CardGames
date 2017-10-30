@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -73,12 +74,96 @@ public class TestPoker {
 
 //	@Test
 //	public void testThreeOfAKind() {
-//		
+//		Hand h1 = new Hand();
+//		h1.add(new Card(Suit.club, CardName.ace, 13));
+//		h1.add(new Card(Suit.spade, CardName.ace, 13));
+//		h1.add(new Card(Suit.heart, CardName.ace, 13));
+//		h1.add(new Card(Suit.club, CardName.eight, 8));
+//		h1.add(new Card(Suit.heart, CardName.five, 5));
+//		Player p = new Player("a", 100);
+//		p.setHand(h1);
+//		Poker poke = new Poker(false);
+//		poke.addPlayer(p);
+//		assertEquals("three", poke.checkForThreeOfAKind(p.getHand()));
+//	}
+	
+//	@Test
+//	public void testFullHouse() {
+//		Hand h1 = new Hand();
+//		h1.add(new Card(Suit.club, CardName.ace, 13));
+//		h1.add(new Card(Suit.spade, CardName.ace, 13));
+//		h1.add(new Card(Suit.heart, CardName.ace, 13));
+//		h1.add(new Card(Suit.club, CardName.eight, 8));
+//		h1.add(new Card(Suit.heart, CardName.five, 8));
+//		Player p = new Player("a", 100);
+//		p.setHand(h1);
+//		Poker poke = new Poker(false);
+//		poke.addPlayer(p);
+//		assertEquals("full house", poke.checkForThreeOfAKind(p.getHand()));
 //	}
 
 //	@Test
-//	public void testPairChecking() {
-//		
+//	public void testSinglePairChecking() {
+//		Hand h1 = new Hand();
+//		h1.add(new Card(Suit.club, CardName.ace, 13));
+//		h1.add(new Card(Suit.spade, CardName.ace, 13));
+//		h1.add(new Card(Suit.heart, CardName.nine, 9));
+//		h1.add(new Card(Suit.club, CardName.eight, 8));
+//		h1.add(new Card(Suit.heart, CardName.five, 5));
+//		Player p = new Player("a", 100);
+//		List<Card> cards = h1.stream().sorted((c1, c2) -> Integer.compare(c1.value, c2.value)).collect(Collectors.toList());
+//		p.setHand(h1);
+//		Poker poke = new Poker(false);
+//		poke.addPlayer(p);
+//		assertEquals(1, poke.checkForPairs(cards));
+//	}
+	
+//	@Test
+//	public void testTwoPairChecking() {
+//		Hand h1 = new Hand();
+//		h1.add(new Card(Suit.club, CardName.ace, 13));
+//		h1.add(new Card(Suit.spade, CardName.ace, 13));
+//		h1.add(new Card(Suit.heart, CardName.nine, 9));
+//		h1.add(new Card(Suit.club, CardName.eight, 8));
+//		h1.add(new Card(Suit.heart, CardName.eight, 8));
+//		Player p = new Player("a", 100);
+//		List<Card> cards = h1.stream().sorted((c1, c2) -> Integer.compare(c1.value, c2.value)).collect(Collectors.toList());
+//		p.setHand(h1);
+//		Poker poke = new Poker(false);
+//		poke.addPlayer(p);
+//		assertEquals(2, poke.checkForPairs(cards));
+//	}
+	
+//	@Test
+//	public void testFourOfAKind() {
+//		Hand h1 = new Hand();
+//		h1.add(new Card(Suit.club, CardName.ace, 13));
+//		h1.add(new Card(Suit.spade, CardName.ace, 13));
+//		h1.add(new Card(Suit.heart, CardName.ace, 13));
+//		h1.add(new Card(Suit.diamond, CardName.eight, 13));
+//		h1.add(new Card(Suit.heart, CardName.eight, 8));
+//		Player p = new Player("a", 100);
+//		List<Card> cards = h1.stream().sorted((c1, c2) -> Integer.compare(c1.value, c2.value)).collect(Collectors.toList());
+//		p.setHand(h1);
+//		Poker poke = new Poker(false);
+//		poke.addPlayer(p);
+//		assertTrue(poke.checkFourOfAKind(cards));
+//	}
+	
+//	@Test
+//	public void testStraight() {
+//		Hand h1 = new Hand();
+//		h1.add(new Card(Suit.club, CardName.two, 2));
+//		h1.add(new Card(Suit.spade, CardName.three, 3));
+//		h1.add(new Card(Suit.heart, CardName.four, 4));
+//		h1.add(new Card(Suit.diamond, CardName.five, 5));
+//		h1.add(new Card(Suit.heart, CardName.six, 6));
+//		Player p = new Player("a", 100);
+//		List<Card> cards = h1.stream().sorted((c1, c2) -> Integer.compare(c1.value, c2.value)).collect(Collectors.toList());
+//		p.setHand(h1);
+//		Poker poke = new Poker(false);
+//		poke.addPlayer(p);
+//		assertTrue(poke.checkForStraight(cards));
 //	}
 	
 }
