@@ -10,11 +10,5 @@ public class TestWar {
 
 	@Test
 	public void playWarWorks() {
-
-public class TestWar {
-
-	@Test
-	public void testPlayWar() {
 	}
-
 }
