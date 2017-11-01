@@ -20,7 +20,7 @@ xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:cont
         </VBox>
         <VBox alignment="CENTER" spacing="10.0">
           <children>
-            <Button mnemonicParsing="false" prefHeight="600.0" prefWidth="250.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="600.0" prefWidth="250.0" text="Poker" onAction="#startPoker" fx:id="startPoker" />
             <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="250.0" text="Rules" />
           </children>
         </VBox>
