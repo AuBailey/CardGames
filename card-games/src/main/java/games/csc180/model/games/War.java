@@ -1,15 +1,16 @@
 package games.csc180.model.games;
 
+import java.io.IOException;
 import java.lang.Thread.State;
 import java.util.ArrayList;
 
-import games.csc180.model.Card;
-import games.csc180.model.Deck;
-import games.csc180.model.Player;
+import games.csc180.model.*;
 
 public class War {
 	public static int numberOfPlayers = 2;
 	public static ArrayList<Card> field = new ArrayList<Card>();
+	public static Deck deck;
+	public static Player[] players;
 
 //	public static void main(String[] args) throws InterruptedException {
 //		Player[] players = new Player[numberOfPlayers];
@@ -44,8 +45,8 @@ public class War {
 	 * @throws InterruptedException from Thread.State.WAITING
 	 */
 	public static void playWar(String[] names) throws InterruptedException {
-		Player[] players = new Player[numberOfPlayers];
-		Deck deck = new Deck(14);
+		players = new Player[numberOfPlayers];
+		deck = new Deck(14);
 		for (int i = 0; i < numberOfPlayers; i++) {
 			players[i] = new Player(names[i], 0);
 		}
@@ -94,5 +95,17 @@ public class War {
 			}
 			initiateWar(players);
 		}
+	}
+	
+	public static void saveWar(String gameName, Deck deck, Player[] players) throws IOException {
+		SaveAndLoad SAL = new SaveAndLoad();
+		SAL.Save(Games.war, gameName, deck, players);
+	}
+	
+	public static void loadWar(String gameName) throws IOException {
+		SaveAndLoad SAL = new SaveAndLoad();
+		ArrayList<Object> obj = SAL.Load(gameName);
+		deck = (Deck)obj.get(1);
+		players = (Player[])obj.get(2);
 	}
 }
