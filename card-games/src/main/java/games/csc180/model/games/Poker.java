@@ -155,11 +155,11 @@ public class Poker {
 	private void makePlayerTurns() {
 		loop: for (int i = 0; i < players.size(); i++) {
 			if (!fold(players.get(i))) {
-				discardAndDraw(players.get(i));
 				int betAmount = 0;
 				makePlayerBet(players.get(i), betAmount);
-				if (betAmount > previousBetAmount && i == 0) {// checks that it is not the first bet of the betting
-																// round and that the bet is a raise.
+				discardAndDraw(players.get(i));
+				makePlayerBet(players.get(i), betAmount);
+				if (betAmount > previousBetAmount && i == 0) {// checks that it is not the first bet of the betting round and that the bet is a raise.
 					previousBetAmount = betAmount;
 					int raisingPlayer = i;
 					for (int j = 0; j < raisingPlayer; j++) {
@@ -175,8 +175,8 @@ public class Poker {
 		}
 	}
 
-	private void makePlayerBet(Player p, int betAmount) {// allows players to make a bet
-		if (p.getName().equals("House")) {
+	public void makePlayerBet(Player p, int betAmount) {// allows players to make a bet
+		if (!p.getName().equals("House")) {
 			boolean illegalBet = true;
 			while (illegalBet) {
 				illegalBet = p.makeBet(betAmount, previousBetAmount);
@@ -287,8 +287,10 @@ public class Poker {
 		return false;
 	}
 
-	public void addPlayer(Player p) {
-		players.add(p);
+	public void addPlayer(String[] names) {
+		for (String string : names) {
+			players.add(new Player(string, 100));
+		}
 	}
 
 	public ArrayList<Player> getPlayers() {

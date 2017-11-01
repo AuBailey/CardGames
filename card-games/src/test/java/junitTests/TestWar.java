@@ -10,7 +10,5 @@ public class TestWar {
 
 	@Test
 	public void playWarWorks() {
-
 	}
-
 }
