@@ -12,39 +12,43 @@ public class War {
 	public static Deck deck;
 	public static Player[] players;
 
-//	public static void main(String[] args) throws InterruptedException {
-//		Player[] players = new Player[numberOfPlayers];
-//		Deck deck = new Deck(14);
-//		String[] names = null;
-//		for (int i = 0; i < numberOfPlayers; i++) {
-//			players[i] = new Player(names[i], 0);
-//		}
-//		outerLoop: while (true) {
-//			for (int i = 0; i < numberOfPlayers; i++) {
-//				if (!players[i].DrawCard(deck)) {
-//					break outerLoop;
-//				}
-//			}
-//		}
-//		rotateTurns: while (true) {
-//			for (int i = 0; i < numberOfPlayers; i++) {
-//				players[i].shuffle();
-//			}
-//			initiateWar(players);
-//			if(players[0].hand.isEmpty()||players[1].hand.isEmpty()) {
-//				return 1;
-//			}
-//			else if(players[1].hand.isEmpty()) {
-//				return 0;
-//			}
-//		}
-//	}
+	public static void main(String[] args) throws Exception {
+		Player[] players = new Player[numberOfPlayers];
+		Deck deck = new Deck(14);
+		String[] names = new String[2];
+		names[1] = "Bob";
+		names[0] = "Jack";
+		for (int i = 0; i < numberOfPlayers; i++) {
+			players[i] = new Player(names[i], 0);
+		}
+		outerLoop: while (true) {
+			for (int i = 0; i < numberOfPlayers; i++) {
+				if (!players[i].DrawCard(deck)) {
+					break outerLoop;
+				}
+			}
+		}
+		RotateTurns: while (true) {
+			for (int i = 0; i < numberOfPlayers; i++) {
+				players[i].shuffle();
+			}
+			initiateWar(players);
+			if(players[0].hand.isEmpty()) {
+				System.out.println("Player 2 has won a war");
+				break RotateTurns;
+			}
+			else if(players[1].hand.isEmpty()) {
+				System.out.println("Player 1 has won a war");
+				break RotateTurns;
+			}
+		}
+	}
 	
 	/**
 	 * Starts a game of war, waiting as necessary for players to be ready
-	 * @throws InterruptedException from Thread.State.WAITING
+	 * @throws Exception 
 	 */
-	public static void playWar(String[] names) throws InterruptedException {
+	public static void playWar(String[] names) throws Exception {
 		players = new Player[numberOfPlayers];
 		deck = new Deck(14);
 		for (int i = 0; i < numberOfPlayers; i++) {
@@ -62,11 +66,11 @@ public class War {
 				players[i].shuffle();
 			}
 			initiateWar(players);
-			if(players[0].getHand().isEmpty()) {
+			if(players[0].getHand().size()<4) {
 				//player 2 wins
 				break rotateTurns;
 			}
-			else if(players[1].getHand().isEmpty()) {
+			else if(players[1].getHand().size()<4) {
 				//player 1 wins
 				break rotateTurns;
 			}
@@ -76,23 +80,28 @@ public class War {
 	/**
 	 * Waits for the players to be ready and then plays their top card, and then plays 3 if 'war' and then calls itself if war.
 	 * @param players The list of current players
-	 * @throws InterruptedException from Thread.State.WAITING
+	 * @throws Exception 
 	 */
-	private static void initiateWar(Player[] players) throws InterruptedException {
-		for (int i = field.size(); i > 0; i--) {
+	private static void initiateWar(Player[] players) throws Exception {
+		for (int i = field.size()-1; i > 0; i--) {
 			field.remove(i);
 		}
 		for (int i = 0; i < numberOfPlayers; i++) {
+			if(players[i].hand.size()==0) {return;}
 			field.add(players[i].PlayTopCard());
+			System.out.println("Player " + (i+1) + " played a card");
 		}
 		if (field.get(field.size() - 1).value > field.get(field.size() - 2).value) {
 			players[0].getHand().addAll(field);
+			System.out.println("Player 2 won the cards");
 		} else if (field.get(field.size() - 1).value < field.get(field.size() - 2).value) {
 			players[1].getHand().addAll(field);
+			System.out.println("Player 1 won the cards");
 		} else {
 			for (int i = 0; i < numberOfPlayers; i++) {
 			field.addAll(players[i].PlayTopCards(3));
 			}
+			System.out.println("War has been initiated");
 			initiateWar(players);
 		}
 	}

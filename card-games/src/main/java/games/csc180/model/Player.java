@@ -6,7 +6,7 @@ public class Player {
 	private DeckHandler ch = new DeckHandler();
 	private String name;
 	private int bankAmount;
-	private Hand hand = new Hand();
+	public Hand hand = new Hand();
 	public Player(String name, int bankAmount) {
 		setName(name);
 		setBankAmount(bankAmount);
@@ -45,10 +45,10 @@ public class Player {
 	public boolean shuffle() {
 		for (int i = 0; i < getHand().size() * 3.7; i++) {
 			for (int j = 0; j < getHand().size(); j++) {
-				int rand = (int) (Math.random() * getHand().size() + .5);
+				int rand = (int) (Math.random() * getHand().size());
 				Card hold = getHand().get(rand);
-				getHand().set(rand, getHand().get(i));
-				getHand().set(i, hold);
+				getHand().set(rand, getHand().get(j));
+				getHand().set(j, hold);
 			}
 		}
 		return true;
@@ -58,15 +58,18 @@ public class Player {
 	 * For the game of war. Removes and plays the top card in the player's hand.
 	 * @return
 	 * 	returns is the played card.
+	 * @throws Exception 
 	 */
-	public Card PlayTopCard() {
-		return getHand().remove(0);
+	public Card PlayTopCard() throws Exception {
+		if(hand.size() == 0) {throw new Exception();}
+		return hand.remove(0);
 	}
 
 	public ArrayList<Card> PlayTopCards(int amount) {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		for (int i = 0; i < amount; i++) {
-			cards.add(getHand().remove(0));
+			if(getHand().size() == 0) {return cards;}
+			cards.add(hand.remove(0));
 		}
 		return cards;
 	}
