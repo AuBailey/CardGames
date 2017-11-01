@@ -197,7 +197,7 @@ public class Poker {
 	 * should be connected to a button that passes in the player and removes them
 	 * from the list.
 	 */
-	private boolean fold(Player p) {
+	public boolean fold(Player p) {
 		// prompt for fold
 		boolean wantsToFold = true;
 		if (wantsToFold) {
@@ -295,6 +295,10 @@ public class Poker {
 
 	public ArrayList<Player> getPlayers() {
 		return this.players;
+	}
+	
+	public void addPlayer(Player p) {
+		players.add(p);
 	}
 
 }
