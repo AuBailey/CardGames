@@ -9,7 +9,6 @@ import games.csc180.model.Deck;
 import games.csc180.model.DeckHandler;
 import games.csc180.model.Player;
 
-
 /*
  * draw and discard
  * match or raise bet
@@ -51,44 +50,52 @@ public class Poker {
 	}
 
 	private Player whoWonHand() {
-		Player p = null;  
+		Player p = null;
 		int currentHandValue = 0;
-		for (int i=0;i<players.size();i++) {
+		for (int i = 0; i < players.size(); i++) {
 			List<Card> currentHand = players.get(i).getHand();
-			currentHand = currentHand.stream().sorted((c1, c2) -> Integer.compare(c1.value, c2.value)).collect(Collectors.toList());
-			if(currentHand.get(0).value == 10 && currentHand.get(1).value == 11 && currentHand.get(2).value == 12 && currentHand.get(3).value == 13 && currentHand.get(4).value == 14) {
-				if(currentHand.get(0).suit.equals(currentHand.get(1).suit) && currentHand.get(1).suit.equals(currentHand.get(2).suit) && 
-						currentHand.get(2).suit.equals(currentHand.get(3).suit) && currentHand.get(3).suit.equals(currentHand.get(4).suit)) {//royal flush
+			currentHand = currentHand.stream().sorted((c1, c2) -> Integer.compare(c1.value, c2.value))
+					.collect(Collectors.toList());
+			if (currentHand.get(0).value == 10 && currentHand.get(1).value == 11 && currentHand.get(2).value == 12
+					&& currentHand.get(3).value == 13 && currentHand.get(4).value == 14) {
+				if (currentHand.get(0).suit.equals(currentHand.get(1).suit)
+						&& currentHand.get(1).suit.equals(currentHand.get(2).suit)
+						&& currentHand.get(2).suit.equals(currentHand.get(3).suit)
+						&& currentHand.get(3).suit.equals(currentHand.get(4).suit)) {// royal flush
 					currentHandValue = 9;
 				}
-			} else if(checkForStraight(currentHand)) {
-				if(currentHand.get(0).suit.equals(currentHand.get(1).suit) && currentHand.get(1).suit.equals(currentHand.get(2).suit) && 
-						currentHand.get(2).suit.equals(currentHand.get(3).suit) && currentHand.get(3).suit.equals(currentHand.get(4).suit)) {
+			} else if (checkForStraight(currentHand)) {
+				if (currentHand.get(0).suit.equals(currentHand.get(1).suit)
+						&& currentHand.get(1).suit.equals(currentHand.get(2).suit)
+						&& currentHand.get(2).suit.equals(currentHand.get(3).suit)
+						&& currentHand.get(3).suit.equals(currentHand.get(4).suit)) {
 					currentHandValue = 8;
 				}
-			} else if(checkFourOfAKind(currentHand)) {
+			} else if (checkFourOfAKind(currentHand)) {
 				currentHandValue = 7;
-			} else if(checkForThreeOfAKind(currentHand).equals("full house")) {
+			} else if (checkForThreeOfAKind(currentHand).equals("full house")) {
 				currentHandValue = 6;
-			} else if(currentHand.get(0).suit.equals(currentHand.get(1).suit) && currentHand.get(1).suit.equals(currentHand.get(2).suit) && currentHand.get(2).suit.equals(currentHand.get(3).suit) && 
-					currentHand.get(3).suit.equals(currentHand.get(4).suit)) {
+			} else if (currentHand.get(0).suit.equals(currentHand.get(1).suit)
+					&& currentHand.get(1).suit.equals(currentHand.get(2).suit)
+					&& currentHand.get(2).suit.equals(currentHand.get(3).suit)
+					&& currentHand.get(3).suit.equals(currentHand.get(4).suit)) {
 				currentHandValue = 5;
-			} else if(checkForStraight(currentHand)) {
+			} else if (checkForStraight(currentHand)) {
 				currentHandValue = 4;
-			} else if(checkForThreeOfAKind(currentHand).equals("three")) {
+			} else if (checkForThreeOfAKind(currentHand).equals("three")) {
 				currentHandValue = 3;
-			} else if(checkForPairs(currentHand) == 2) {
+			} else if (checkForPairs(currentHand) == 2) {
 				currentHandValue = 2;
-			} else if(checkForPairs(currentHand) == 1) {
+			} else if (checkForPairs(currentHand) == 1) {
 				currentHandValue = 1;
 			}
-			if(winningHandValue == 5 && currentHandValue == 5) {
-				checkForHighestCard(currentHandValue ,i);
+			if (winningHandValue == 5 && currentHandValue == 5) {
+				checkForHighestCard(currentHandValue, i);
 			}
-			if(winningHandValue ==0 && currentHandValue ==0) {
-				checkForHighestCard(currentHandValue ,i);
+			if (winningHandValue == 0 && currentHandValue == 0) {
+				checkForHighestCard(currentHandValue, i);
 			}
-			if(currentHandValue > winningHandValue) {
+			if (currentHandValue > winningHandValue) {
 				winningHandValue = currentHandValue;
 				handWinningPlayerIndex = i;
 			}
@@ -141,41 +148,41 @@ public class Poker {
 	}
 
 	/*
-	 * loops through each players individual turns
-	 * after a player makes a bet it checks if that bet was a raise and if it was loops through the previous players to check if they want to fold of
-	 * match
+	 * loops through each players individual turns after a player makes a bet it
+	 * checks if that bet was a raise and if it was loops through the previous
+	 * players to check if they want to fold of match
 	 */
 	private void makePlayerTurns() {
-		loop:
-		for(int i=0;i<players.size();i++) {
-			if(!fold(players.get(i))) {
+		loop: for (int i = 0; i < players.size(); i++) {
+			if (!fold(players.get(i))) {
 				discardAndDraw(players.get(i));
 				int betAmount = 0;
 				makePlayerBet(players.get(i), betAmount);
-				if(betAmount>previousBetAmount && i==0) {//checks that it is not the first bet of the betting round and that the bet is a raise.
+				if (betAmount > previousBetAmount && i == 0) {// checks that it is not the first bet of the betting
+																// round and that the bet is a raise.
 					previousBetAmount = betAmount;
 					int raisingPlayer = i;
-					for(int j=0;j<raisingPlayer;j++) {
-						if(!fold(players.get(j))) {
+					for (int j = 0; j < raisingPlayer; j++) {
+						if (!fold(players.get(j))) {
 							makePlayerBet(players.get(j), betAmount);
-						}		
+						}
 					}
 				}
-				pot+=betAmount;
+				pot += betAmount;
 			} else {
 				break loop;
 			}
 		}
 	}
 
-	private void makePlayerBet(Player p, int betAmount) {//allows players to make a bet
-		if(p.getName().equals("House")) {
+	private void makePlayerBet(Player p, int betAmount) {// allows players to make a bet
+		if (p.getName().equals("House")) {
 			boolean illegalBet = true;
 			while (illegalBet) {
 				illegalBet = p.makeBet(betAmount, previousBetAmount);
 			}
 		} else {
-			p.makeBet(previousBetAmount,previousBetAmount);
+			p.makeBet(previousBetAmount, previousBetAmount);
 		}
 	}
 
@@ -187,100 +194,105 @@ public class Poker {
 	}
 
 	/*
-	 * should be connected to a button that passes in the player and removes them from the list.
+	 * should be connected to a button that passes in the player and removes them
+	 * from the list.
 	 */
 	private boolean fold(Player p) {
-		//prompt for fold
+		// prompt for fold
 		boolean wantsToFold = true;
-		if(wantsToFold) {
+		if (wantsToFold) {
 			players.remove(p);
 			return true;
 		}
 		return false;
 	}
-	
-	public Player checkForHighestCard(int currentWinningHandValue ,int i) {
+
+	public Player checkForHighestCard(int currentWinningHandValue, int i) {
 		Player p = null;
-		if(currentWinningHandValue>winningHandValue) {
+		if (currentWinningHandValue > winningHandValue) {
 			handWinningPlayerIndex = i;
-		} else if(currentWinningHandValue==winningHandValue) {
-			int highestCardValuePrevPlayer =0;
-			for(int j=0;j<players.get(handWinningPlayerIndex).getHand().size();j++) {
-				if(players.get(handWinningPlayerIndex).getHand().get(i).value>highestCardValuePrevPlayer) {
+		} else if (currentWinningHandValue == winningHandValue) {
+			int highestCardValuePrevPlayer = 0;
+			for (int j = 0; j < players.get(handWinningPlayerIndex).getHand().size(); j++) {
+				if (players.get(handWinningPlayerIndex).getHand().get(i).value > highestCardValuePrevPlayer) {
 					highestCardValuePrevPlayer = players.get(handWinningPlayerIndex).getHand().get(i).value;
-				}	
+				}
 			}
-			int highestCardValueCurPlayer =0;
-			for(int j=0;j<players.get(i).getHand().size();j++) {
-				if(players.get(i).getHand().get(i).value>highestCardValuePrevPlayer) {
+			int highestCardValueCurPlayer = 0;
+			for (int j = 0; j < players.get(i).getHand().size(); j++) {
+				if (players.get(i).getHand().get(i).value > highestCardValuePrevPlayer) {
 					highestCardValueCurPlayer = players.get(i).getHand().get(i).value;
-				}	
+				}
 			}
-			if(highestCardValuePrevPlayer > highestCardValueCurPlayer) {
+			if (highestCardValuePrevPlayer > highestCardValueCurPlayer) {
 				p = players.get(handWinningPlayerIndex);
-			} else if(highestCardValuePrevPlayer < highestCardValueCurPlayer) {
+			} else if (highestCardValuePrevPlayer < highestCardValueCurPlayer) {
 				p = players.get(i);
 			}
 		}
 		return p;
 	}
-	
+
 	public String checkForThreeOfAKind(List<Card> hand) {
-		if(hand.get(0).value == hand.get(1).value && hand.get(1).value == hand.get(2).value) {
-			if(hand.get(3).value == hand.get(4).value) {
+		if (hand.get(0).value == hand.get(1).value && hand.get(1).value == hand.get(2).value) {
+			if (hand.get(3).value == hand.get(4).value) {
 				return "full house";
 			}
 			return "three";
-		} else if(hand.get(1).value == hand.get(2).value && hand.get(2).value == hand.get(3).value) {
+		} else if (hand.get(1).value == hand.get(2).value && hand.get(2).value == hand.get(3).value) {
 			return "three";
-		} else if(hand.get(2).value == hand.get(3).value && hand.get(3).value == hand.get(4).value) {
-			if(hand.get(0).value == hand.get(1).value) {
+		} else if (hand.get(2).value == hand.get(3).value && hand.get(3).value == hand.get(4).value) {
+			if (hand.get(0).value == hand.get(1).value) {
 				return "full house";
 			}
 			return "three";
 		}
 		return "no";
 	}
-	
+
 	public int checkForPairs(List<Card> hand) {
-		int pairCount =0;
-		if(hand.get(0).value == hand.get(1).value) {
+		int pairCount = 0;
+		if (hand.get(0).value == hand.get(1).value) {
 			pairCount++;
 		}
-		if(hand.get(1).value == hand.get(2).value) {
+		if (hand.get(1).value == hand.get(2).value) {
 			pairCount++;
 		}
-		if(hand.get(2).value == hand.get(3).value) {
+		if (hand.get(2).value == hand.get(3).value) {
 			pairCount++;
 		}
-		if(hand.get(3).value == hand.get(4).value) {
+		if (hand.get(3).value == hand.get(4).value) {
 			pairCount++;
 		}
 		return pairCount;
 	}
-	
+
 	public boolean checkForStraight(List<Card> hand) {
-		if(hand.get(1).value == (hand.get(0).value+1) && hand.get(2).value == (hand.get(0).value+2) && hand.get(3).value == (hand.get(0).value+3) && hand.get(4).value == (hand.get(0).value+4)) {
+		if (hand.get(1).value == (hand.get(0).value + 1) && hand.get(2).value == (hand.get(0).value + 2)
+				&& hand.get(3).value == (hand.get(0).value + 3) && hand.get(4).value == (hand.get(0).value + 4)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean checkFourOfAKind(List<Card> currentHand) {
-		if(currentHand.get(0).value == currentHand.get(1).value && currentHand.get(1).value == currentHand.get(2).value && currentHand.get(2).value == currentHand.get(3).value) {
+		if (currentHand.get(0).value == currentHand.get(1).value && currentHand.get(1).value == currentHand.get(2).value
+				&& currentHand.get(2).value == currentHand.get(3).value) {
 			return true;
-		} else if(currentHand.get(1).value == currentHand.get(2).value && currentHand.get(2).value == currentHand.get(3).value && currentHand.get(3).value == currentHand.get(4).value) {
+		} else if (currentHand.get(1).value == currentHand.get(2).value
+				&& currentHand.get(2).value == currentHand.get(3).value
+				&& currentHand.get(3).value == currentHand.get(4).value) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void addPlayer(Player p) {
 		players.add(p);
 	}
-	
+
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
-	
+
 }
